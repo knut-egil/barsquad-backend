@@ -25,9 +25,7 @@ type JoinPayload = {
  *
  * name: Squad name
  */
-type JoinResponse = {
-  name: string;
-};
+type JoinResponse = BarSquad.SquadSession;
 
 const join = async (
   req: Request<JoinPayload>,
@@ -103,9 +101,7 @@ const join = async (
  *
  * name: Desired squad name
  */
-type CreatePayload = {
-  name: string;
-};
+type CreatePayload = BarSquad.SquadSession;
 
 /**
  * Create squad response
