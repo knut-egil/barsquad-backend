@@ -6,6 +6,7 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import database from "./database";
+import routes from "./routes";
 
 // Async main wrapper
 async function main() {
@@ -25,6 +26,7 @@ async function main() {
     app.use(cors());
 
     // Set up routes
+    app.use("/api", routes);
 
     // Listen
     const PORT = process.env.PORT ?? 3000;
