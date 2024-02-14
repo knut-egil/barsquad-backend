@@ -101,7 +101,9 @@ const join = async (
  *
  * name: Desired squad name
  */
-type CreatePayload = BarSquad.SquadSession;
+type CreatePayload = {
+  name: string;
+};
 
 /**
  * Create squad response
