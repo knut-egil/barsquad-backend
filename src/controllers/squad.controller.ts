@@ -54,11 +54,11 @@ const join = async (
     // Check if we failed to find a squad
     if (!squad) {
       // Set appropriate error message & code
-      errorMessage = "Unable to find a squad with that squad code.";
+      errorMessage = "Unable to find a squad using that squad code.";
       errorCode = "squad.code.no_squad";
 
       // Throw error to send error response
-      throw new Error("Unable to find a squad with that squad code.");
+      throw new Error("Unable to find a squad using that squad code.");
     }
 
     // Build join result
