@@ -44,7 +44,9 @@ export class SquadRegistry extends EventEmitter {
 const squadRegistry = SquadRegistry.get();
 
 squadRegistry.on(SquadRegistry.events.SQUAD_ADDED, (squad) => {
-  console.info(`Squad "${squad.name}" added to squad registry!`);
+  console.info(
+    `Squad "${squad.name}" added to squad registry! Squad code: "${squad.code}"`
+  );
 });
 
 //#region Create squad
