@@ -23,6 +23,7 @@ squadRouter.post("/location", (req, res) => {
 
   // TODO: Look up in squad registry
   // and update location for the instance!
+  // Location updates incoming! roughly every 15s in background even!
 
   // Sure
   res.end();
