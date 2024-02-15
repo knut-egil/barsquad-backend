@@ -10,6 +10,8 @@ import websocket from "./websocket";
 import database from "./database";
 import routes from "./routes";
 
+import squadNamespace from "./websocket/squad.namespace";
+
 // Async main wrapper
 async function main() {
   try {
@@ -34,6 +36,9 @@ async function main() {
       // Log
       console.info(`A new WS client connected! Socket id: ${socket.id}`);
     });
+
+    // Register squad namespace
+    await squadNamespace.register();
 
     // Set up middleware
     app.use(express.json());
