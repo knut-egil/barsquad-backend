@@ -1,5 +1,5 @@
 // import
-import { Namespace, Server } from "socket.io";
+import { Namespace, Server, Socket } from "socket.io";
 import websocket from "./../websocket";
 
 // References
@@ -18,9 +18,22 @@ async function register() {
 
   // Add basic connection listeneer
   squadNS.on("connection", (socket) => {
-    // Log
+    // Extract :code param
+    const code = socket.nsp.name.split("/").at(-1);
+
+    // No code, reject connection!
+    if (!code) {
+      // Disconnect
+      socket.disconnect();
+      return;
+    }
+
+    // Assign join-code to socket instance
+    (socket as Socket & { code: string }).code = code;
+
+    // log
     console.info(
-      `A new WS client connected to "/squad" namespace! Socket id: ${socket.id}`
+      `A new WS client connected to "/squad/${code}" namespace! Socket id: ${socket.id}`
     );
   });
 }
