@@ -3,8 +3,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // Import
+import http from "http";
 import express from "express";
 import cors from "cors";
+import websocket from "./websocket";
 import database from "./database";
 import routes from "./routes";
 
@@ -21,6 +23,12 @@ async function main() {
     // Create express app
     const app = express();
 
+    // Crate http server
+    const server = http.createServer(app);
+
+    // Let's init the websocket server
+    const io = websocket.init(server);
+
     // Set up middleware
     app.use(express.json());
     app.use(cors());
@@ -30,7 +38,7 @@ async function main() {
 
     // Listen
     const PORT = process.env.PORT ?? 3000;
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.info(`Server listening @ http://127.0.0.1:${PORT}`);
     });
   } catch (err) {
