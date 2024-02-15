@@ -29,6 +29,12 @@ async function main() {
     // Let's init the websocket server
     const io = websocket.init(server);
 
+    // Basic websocket connection logger
+    io.on("connection", (socket) => {
+      // Log
+      console.info(`A new WS client connected! Socket id: ${socket.id}`);
+    });
+
     // Set up middleware
     app.use(express.json());
     app.use(cors());
