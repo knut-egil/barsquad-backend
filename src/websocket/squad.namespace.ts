@@ -14,7 +14,7 @@ async function register() {
   server = websocket.get();
 
   // Create namespace
-  squadNS = server.of("/squad");
+  squadNS = server.of(/^\/squad\/([0-9a-fA-f]{6})$/gim);
 
   // Add basic connection listeneer
   squadNS.on("connection", (socket) => {
