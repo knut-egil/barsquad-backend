@@ -29,8 +29,8 @@ export namespace BarSquad {
      * Location
      */
     location?: {
-      lat: string;
-      lng: string;
+      lat: number;
+      lng: number;
     };
   };
 
