@@ -74,6 +74,16 @@ squadRouter.post("/location", (req, res) => {
         lat: location.coords.latitude,
         lng: location.coords.longitude,
       };
+
+      // Update last seen
+      squad.members[memberIndex].last_seen = Math.round(location.timestamp);
+
+      const member = squad.members[memberIndex];
+      console.log(
+        `[${new Date().toISOString()}] Updated "${
+          member.name
+        }" last_seen & location, new data: ${JSON.stringify(member, null, 2)}`
+      );
     }
   }
 

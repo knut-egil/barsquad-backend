@@ -18,6 +18,7 @@ type APIResponse<T> = {
  */
 type JoinPayload = {
   code: string;
+  username: string;
 };
 
 /**
@@ -32,7 +33,7 @@ const join = async (
   res: Response<APIResponse<JoinResponse>>
 ) => {
   // Look up active squads by code
-  const { code } = req.body as JoinPayload;
+  const { code, username } = req.body as JoinPayload;
 
   let errorMessage: string | undefined;
   let errorCode: string | undefined;
@@ -61,6 +62,15 @@ const join = async (
       throw new Error("Unable to find a squad using that squad code.");
     }
 
+    // Add member!!!!
+    if (squad.members.findIndex((member) => member.name === username) === -1) {
+      const member: BarSquad.SquadMember = {
+        name: username,
+        status: "present",
+        last_seen: Date.now(),
+      };
+      squad.members.push(member);
+    }
     // Build join result
     const result: JoinResponse = squad;
 
