@@ -4,7 +4,7 @@ import { join, create } from "../controllers/squad.controller";
 import { SquadRegistry } from "../services/squad.service";
 
 // Create router
-const router = Router();
+const router = Router({ mergeParams: true });
 
 // Create a new squad
 router.post("/create", create);
@@ -13,7 +13,7 @@ router.post("/create", create);
 router.post("/join", join);
 
 // Per-squad router
-const squadRouter = Router();
+const squadRouter = Router({ mergeParams: true });
 
 // Extract code param!
 squadRouter.use((req, res, next) => {
