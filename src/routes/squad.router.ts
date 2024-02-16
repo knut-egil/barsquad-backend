@@ -18,7 +18,9 @@ const squadRouter = Router();
 squadRouter.post("/location", (req, res) => {
   // Log!
   console.info(
-    `POST /:code/location, data: ${JSON.stringify(req.body, null, 2)}`
+    `POST /:code/location, date: ${new Date(
+      req.body.locations[0].timestamp
+    ).toISOString()} data: ${JSON.stringify(req.body, null, 2)}`
   );
 
   // TODO: Look up in squad registry
