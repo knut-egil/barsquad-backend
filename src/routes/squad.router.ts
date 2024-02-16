@@ -24,15 +24,14 @@ squadRouter.use((req, res, next) => {
   next();
 });
 
-const squadRegistry = SquadRegistry.get();
 // Update squad member location
 squadRouter.post("/location", (req, res) => {
   // Log!
-  console.info(
+  /*console.info(
     `POST /:code/location, date: ${new Date(
       req.body.locations[0].timestamp
     ).toISOString()} data: ${JSON.stringify(req.body, null, 2)}`
-  );
+  );*/
 
   // TODO: Look up in squad registry
   // and update location for the instance!
@@ -53,12 +52,18 @@ squadRouter.post("/location", (req, res) => {
 
   // Extract code
   const code = (req as Request & { code: string }).code;
+  console.info(
+    `[${new Date().toISOString()}] Location update requset from "${username}" for squad #${code}. Data: ${JSON.stringify(
+      req.body
+    )}`
+  );
 
   // Get squad
+  const squadRegistry = SquadRegistry.get();
   const squad = squadRegistry.get(code);
 
   if (!squad) {
-    res.end();
+    res.status(500).end();
     return;
   }
   // Find member and set new location!
@@ -110,6 +115,8 @@ squadRouter.get("/location", (req, res) => {
   // Extract code
   const code = (req as Request & { code: string }).code;
 
+  // Get squad
+  const squadRegistry = SquadRegistry.get();
   // Get latest data!
   const squad = squadRegistry.get(code);
 
